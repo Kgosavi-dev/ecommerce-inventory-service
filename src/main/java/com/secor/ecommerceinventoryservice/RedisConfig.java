@@ -1,4 +1,4 @@
-package com.secor.restroservice;
+package com.secor.ecommerceinventoryservice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

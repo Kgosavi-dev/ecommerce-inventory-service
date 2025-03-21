@@ -1,17 +1,18 @@
-package com.secor.restroservice;
+package com.secor.ecommerceinventoryservice;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "restros")
+@Document(collection = "menu")
 @Getter @Setter
-public class Restro {
+public class MenuItem {
 
     @Id
+    private String itemid;
     private String restroid;
-    private String name;
-    private String owner;
+    private String dishid;
+    private Integer price;
 
 }
