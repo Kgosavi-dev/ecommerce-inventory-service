@@ -15,49 +15,28 @@ public class MainRestController {
     private static final Logger log = LoggerFactory.getLogger(MainRestController.class);
 
     @Autowired
-    RestroRepository restroRepository;
+    InventoryRepository inventoryRepository;
     @Autowired
     AuthService authService;
-    @Autowired
-    MenuRepository menuRepository;
 
 
-    @PostMapping("create/restro")
-    public ResponseEntity<?> createRestro(@RequestBody Restro restro,
+    @PostMapping("create/inventory")
+    public ResponseEntity<?> createInventory(@RequestBody Inventory inventory,
                                            @RequestHeader("Authorization") String token)
     {
-        log.info("Received request to create restro: {}", restro);
+        log.info("Received request to create inventory: {}", inventory);
         if(!authService.validateToken(token))
         {
             log.info("Invalid token: {}", token);
             return ResponseEntity.badRequest().body("Invalid token");
         }
         log.info("Token is valid: {}", token);
-        log.info("Saving restro: {}", restro);
+        log.info("Saving inventory: {}", inventory);
 
-        restro.setRestroid(String.valueOf(new Random().nextInt(1000)));
-        restroRepository.save(restro);
+        inventory.setInventoryid(String.valueOf(new Random().nextInt(1000)));
+        inventoryRepository.save(inventory);
 
-        return ResponseEntity.ok("Restro created successfully");
-    }
-
-    @PostMapping("create/menuitem")
-    public ResponseEntity<?> createMenuItem(@RequestBody MenuItem menuItem,
-                                            @RequestHeader("Authorization") String token)
-    {
-        log.info("Received request to create menu item: {}", menuItem);
-        if(!authService.validateToken(token))
-        {
-            log.info("Invalid token: {}", token);
-            return ResponseEntity.badRequest().body("Invalid token");
-        }
-        log.info("Token is valid: {}", token);
-        log.info("Saving menu item: {}", menuItem);
-
-        menuItem.setItemid(String.valueOf(new Random().nextInt(1000)));
-        menuRepository.save(menuItem);
-
-        return ResponseEntity.ok("Menu item created successfully");
+        return ResponseEntity.ok("Inventory created successfully");
     }
 
 }
